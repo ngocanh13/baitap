@@ -7,4 +7,5 @@ export const productService = {
     getDetailProduct(id){
         return httpClient.get(`/products/${id}`)
     }
+   
 } 
