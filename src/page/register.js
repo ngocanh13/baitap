@@ -1,105 +1,81 @@
+import { authService } from "./services/authService";
+
 export const register = () => {
-    document.getElementById('app').innerHTML = `<!-- source: https://gist.github.com/nraloux/bce10c4148380061781b928cdab9b193 -->
-    <!-- I have added support for dark mode and improved UI -->
-    
-    <div class="h-full bg-gray-400 dark:bg-gray-900">
-        <!-- Container -->
-        <div class="mx-auto">
-            <div class="flex justify-center px-6 py-12">
-                <!-- Row -->
-                <div class="w-full xl:w-3/4 lg:w-11/12 flex">
-                    <!-- Col -->
-                    <div class="w-full h-auto bg-gray-400 dark:bg-gray-800 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
-                        style="background-image: url('https://source.unsplash.com/Mv9hjnEUHR4/600x800')"></div>
-                    <!-- Col -->
-                    <div class="w-full lg:w-7/12 bg-white dark:bg-gray-700 p-5 rounded-lg lg:rounded-l-none">
-                        <h3 class="py-4 text-2xl text-center text-gray-800 dark:text-white">Create an Account!</h3>
-                        <form class="px-8 pt-6 pb-8 mb-4 bg-white dark:bg-gray-800 rounded">
-                            <div class="mb-4 md:flex md:justify-between">
-                                <div class="mb-4 md:mr-2 md:mb-0">
-                                    <label class="block mb-2 text-sm font-bold text-gray-700 dark:text-white" for="firstName">
-                                        First Name
-                                    </label>
-                                    <input
-                                        class="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                        id="firstName"
-                                        type="text"
-                                        placeholder="First Name"
-                                    />
-                                </div>
-                                <div class="md:ml-2">
-                                    <label class="block mb-2 text-sm font-bold text-gray-700 dark:text-white" for="lastName">
-                                        Last Name
-                                    </label>
-                                    <input
-                                        class="w-full px-3 py-2 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                        id="lastName"
-                                        type="text"
-                                        placeholder="Last Name"
-                                    />
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block mb-2 text-sm font-bold text-gray-700 dark:text-white" for="email">
-                                    Email
-                                </label>
-                                <input
-                                    class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                    id="email"
-                                    type="email"
-                                    placeholder="Email"
-                                />
-                            </div>
-                            <div class="mb-4 md:flex md:justify-between">
-                                <div class="mb-4 md:mr-2 md:mb-0">
-                                    <label class="block mb-2 text-sm font-bold text-gray-700 dark:text-white" for="password">
-                                        Password
-                                    </label>
-                                    <input
-                                        class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                        id="password"
-                                        type="password"
-                                        placeholder="******************"
-                                    />
-                                    <p class="text-xs italic text-red-500">Please choose a password.</p>
-                                </div>
-                                <div class="md:ml-2">
-                                    <label class="block mb-2 text-sm font-bold text-gray-700 dark:text-white" for="c_password">
-                                        Confirm Password
-                                    </label>
-                                    <input
-                                        class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                        id="c_password"
-                                        type="password"
-                                        placeholder="******************"
-                                    />
-                                </div>
-                            </div>
-                            <div class="mb-6 text-center">
-                                <button
-                                    class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 dark:bg-blue-700 dark:text-white dark:hover:bg-blue-900 focus:outline-none focus:shadow-outline"
-                                    type="button"
-                                >
-                                    Register Account
-                                </button>
-                            </div>
-                            <hr class="mb-6 border-t" />
-                            <div class="text-center">
-                                <a class="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
-                                    href="#">
-                                    Forgot Password?
-                                </a>
-                            </div>
-                            <div class="text-center">
-                                <a class="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
-                                    href="./index.html">
-                                    Already have an account? Login!
-                                </a>
-                            </div>
-                        </form>
+
+    const render = (template) => {
+        document.getElementById('app').innerHTML = template;
+    };
+
+    render(`
+        <section class="bg-white dark:bg-gray-900">
+            <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
+                <form class="w-full max-w-md">
+                    <div class="flex justify-center mx-auto">
+                        <img class="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="">
                     </div>
-                </div>
+                    <div class="relative flex items-center mt-8">
+                        <span class="absolute">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </span>
+                        <input autocomplete="username" type="text" id="name" class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Username">
+                    </div>
+                    <div class="relative flex items-center mt-6">
+                        <span class="absolute">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </span>
+                        <input autocomplete="email" type="email" id="email" class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address">
+                    </div>
+                    <div class="relative flex items-center mt-4">
+                        <span class="absolute">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </span>
+                        <input autocomplete="new-password" type="password" id="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password">
+                    </div>
+                    <div class="relative flex items-center mt-4">
+                        <span class="absolute">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </span>
+                        <input autocomplete="new-password" type="password" id="password_confirmation" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Confirm Password">
+                    </div>
+                    <div class="mt-6">
+                        <button type="button" id="btn-register" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                            Sign Up
+                        </button>
+                        <div class="mt-6 text-center ">
+                            <a href="#" class="text-sm text-blue-500 hover:underline dark:text-blue-400">
+                                Already have an account?
+                            </a>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>
-    </div>`
+        </section>
+    `);
+
+    document.getElementById('btn-register').addEventListener('click', async () => {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const password_confirmation = document.getElementById('password_confirmation').value;
+
+        const res = await authService.register({
+            name: name,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation
+        });
+
+        if (res.status === 200) {
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+        }
+    });
 }
