@@ -73,13 +73,13 @@ export const register = () => {
             password_confirmation: password_confirmation
         });
        
-        if (res.success) {
+        if (res.status === 200) {
             handleRegister();
         }
 
        
     });
     function handleRegister(){
-        location.replace("/")
+        window.location.replace("/")
     }
 }
