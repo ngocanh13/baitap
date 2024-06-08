@@ -46,8 +46,8 @@ export const register = () => {
                         <input autocomplete="new-password" type="password" id="password_confirmation" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Confirm Password">
                     </div>
                     <div class="mt-6">
-                        <button type="button" id="btn-register" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                            Sign Up
+                        <button onclick ="handleRegister" type="button" id="btn-register" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                            Đăng kí 
                         </button>
                         <div class="mt-6 text-center ">
                             <a href="#" class="text-sm text-blue-500 hover:underline dark:text-blue-400">
@@ -72,10 +72,14 @@ export const register = () => {
             password: password,
             password_confirmation: password_confirmation
         });
-
-        if (res.status === 200) {
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('user', JSON.stringify(res.data.user));
+       
+        if (res.success) {
+            handleRegister();
         }
+
+       
     });
+    function handleRegister(){
+        location.replace("/")
+    }
 }

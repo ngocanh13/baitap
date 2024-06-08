@@ -33,8 +33,8 @@ export const login = () => {
           
 
           <div class="mt-6">
-              <button type="button" id="btn-login" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                  Sign Up
+              <button onclick="login()" type="button" id="btn-login" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                  Đăng Nhập
               </button>
 
               <div class="mt-6 text-center ">
@@ -57,6 +57,10 @@ export const login = () => {
     if (res.status === 200){
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('user', JSON.stringify(res.data.user))
+      login();
     }
   });
+    function login() {
+        location.replace("/")
+    } 
 }
