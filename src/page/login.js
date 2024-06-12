@@ -1,9 +1,10 @@
 import { authService } from "./services/authService"
 export const login = () => {
-  const render = (template) => {
-    document.getElementById('app').innerHTML = template;
-  };
-  render(` <section class="bg-white dark:bg-gray-900">
+    const render = (template) => {
+        document.getElementById('app').innerHTML = template;
+    };
+    render(` <section class="bg-white dark:bg-gray-900">
+       
   <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
       <form class="w-full max-w-md">
           <div class="flex justify-center mx-auto">
@@ -29,38 +30,46 @@ export const login = () => {
 
               <input autocomplete="on" id="password" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password">
           </div>
-
-          
-
+          <div class="flex">
+          <span id="errors" class="text-red-500 mt-5 font-bold"></span>
+          </div>
           <div class="mt-6">
-              <button onclick="login()" type="button" id="btn-login" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+              <button type="button" id="btn-login" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                   Đăng Nhập
               </button>
 
-              <div class="mt-6 text-center ">
-                  <a href="#" class="text-sm text-blue-500 hover:underline dark:text-blue-400">
-                      Already have an account?
-                  </a>
-              </div>
           </div>
       </form>
   </div>
-</section>`) 
-
-  document.getElementById('btn-login').addEventListener('click', async () =>{
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-    const res = await authService.login({
-      email: email,
-      password: password
-    }) 
-    if (res.status === 200){
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('user', JSON.stringify(res.data.user))
-      login();
-    }
-  });
+</section>`)
     function login() {
         location.replace("/")
-    } 
+    }
+    document.getElementById('btn-login').addEventListener('click', async () => {
+        const email = document.getElementById('email').value
+        const password = document.getElementById('password').value
+        const errors = document.getElementById('errors')
+        if (!email || !password) {
+            errors.innerHTML = 'Bạn chưa nhập đủ thông tin'
+            return
+        }
+        errors.innerHTML = ''
+        const emailREG = /^\S+@\S+\.\S+$/
+
+        if (!emailREG.test(email)) {
+            errors.innerHTML = 'Email không đúng định dạng !'
+            return
+        }
+        errors.innerHTML = ''
+        const res = await authService.login({
+            email: email,
+            password: password
+        })
+        if (res.status === 200) {
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('user', JSON.stringify(res.data.user))
+            login();
+        }
+    });
+
 }

@@ -46,7 +46,7 @@ export const register = () => {
                         <input autocomplete="new-password" type="password" id="password_confirmation" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Confirm Password">
                     </div>
                     <div class="mt-6">
-                        <button onclick ="handleRegister" type="button" id="btn-register" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                        <button type="button" id="btn-register" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                             Đăng kí 
                         </button>
                         <div class="mt-6 text-center ">
@@ -59,6 +59,18 @@ export const register = () => {
             </div>
         </section>
     `);
+
+
+
+
+    // validate thông tin sau user_name , email , phoneNumber , password , confirm password
+
+
+    // ====== 1. các trường không được để trống
+    // ====== 2. email đúng định dạng
+    // ===== 3. số điện thoại đúng định dạng 10 số ( dùng regex )
+    // ===== 4. mật khẩu và xác nhận mật khẩu trên 6 kí tự và trùng nhau 
+
 
     document.getElementById('btn-register').addEventListener('click', async () => {
         const name = document.getElementById('name').value;
@@ -73,13 +85,8 @@ export const register = () => {
             password_confirmation: password_confirmation
         });
        
-        if (res.status === 200) {
-            handleRegister();
+        if (res.status === 201) {
+            location.replace("/")
         }
-
-       
     });
-    function handleRegister(){
-        window.location.replace("/")
-    }
 }

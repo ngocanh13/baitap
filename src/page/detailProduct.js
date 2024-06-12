@@ -1,42 +1,17 @@
 import { productService } from "./services/product"
 
 export const detailProduct = async (params) => {
-    const { data: product } = await productService.getDetailProduct(params.data.id);
-    console.log("product", product);
+  const { data: product } = await productService.getDetailProduct(params.data.id);
+  console.log("product", product);
 
-    document.getElementById('app').innerHTML = `
-    <div>
-        
-    <!DOCTYPE html>
-    <html lang="en" >
-    <head>
-      <meta charset="UTF-8">
-      <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/tailwindcss@2.0.1/dist/tailwind.min.css'>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap'><link rel="stylesheet" href="./style.css">
-    
-    </head>
-    <body class="antialiased">
-    
-    
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+  document.getElementById('app').innerHTML = `
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div class="flex flex-col md:flex-row -mx-4">
           <div class="md:flex-1 px-4">
             <div x-data="{ image: 1 }" x-cloak>
               <div class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4">
                 <div x-show="image === 1" class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center">
                   <span class="text-5xl">1</span>
-                </div>
-    
-                <div x-show="image === 2" class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center">
-                  <span class="text-5xl">2</span>
-                </div>
-    
-                <div x-show="image === 3" class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center">
-                  <span class="text-5xl">3</span>
-                </div>
-    
-                <div x-show="image === 4" class="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center">
-                  <span class="text-5xl">4</span>
                 </div>
               </div>
     
@@ -93,11 +68,5 @@ export const detailProduct = async (params) => {
           </div>
         </div>
       </div>
-    </div>
-      </body>
-    <!-- partial -->
-      <script src='https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js'></script>
-    </html>
-    
-    </div> `;
+    </div>`;
 }
