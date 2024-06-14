@@ -100,7 +100,7 @@ export const register = () => {
             errors.innerHTML='Email ko đúng định dạng'
             return
         }
-        const phoneREG = /^[0-9\-\+]{9,15}$/
+        const phoneREG = /^[0-9\-\+]{10}$/
         if (!phoneREG.test(phone)){
             errors.innerHTML ='phone ko đúng định dạng'
             return

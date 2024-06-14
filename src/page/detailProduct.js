@@ -5,9 +5,7 @@ export const detailProduct = async (params) => {
   console.log("product", product);
 
   document.getElementById('app').innerHTML = `
-
-  ${product.map((_elt => {
-    return` <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div class="flex flex-col md:flex-row -mx-4">
           <div class="md:flex-1 px-4">
             <div x-data="{ image: 1 }" x-cloak>
@@ -29,7 +27,7 @@ export const detailProduct = async (params) => {
             </div>
           </div>
           <div class="md:flex-1 px-4">
-            <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">Lorem ipsum dolor, sit amet consectetur, adipisicing elit.</h2>
+            <h2 class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">${product.name}</h2>
             <p class="text-gray-500 text-sm">By <a href="#" class="text-indigo-600 hover:underline">ABC Company</a></p>
     
             <div class="flex items-center space-x-4 my-4">
@@ -70,9 +68,6 @@ export const detailProduct = async (params) => {
           </div>
         </div>
       </div>
-    </div>`
-
-  })).join('')
-    }
+    </div>
   `;
 }
